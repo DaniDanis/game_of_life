@@ -1,24 +1,19 @@
-# game_of_life
+# Game of life by Danidanis.
 
-## Project setup
+O Game of life desenvolvido aqui é baseado no game [Play game of life](https://playgameoflife.com/), onde é desenvolvido um automata que simula o "Jogo da vida"
+
+## Instalar as dependencias do projeto.
+
+Para instalar as dependencias do projeto rode o seguinte comando:
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Rodando o projeto
+
+Rode o comando a baixo para ver o programa rodando em sua maquina.
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
