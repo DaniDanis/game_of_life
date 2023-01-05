@@ -1,26 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container">
+    <button v-on:click="draw">Inicia</button>
+    <tabuleiro-canvas></tabuleiro-canvas>
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import TabuleiroCanvas from "./components/TabuleiroCanvas.vue";
 
 export default {
-  name: "App",
   components: {
-    HelloWorld,
+    TabuleiroCanvas,
+  },
+  methods: {
+    localizaMouse(event) {
+      const canvas = document.getElementById("canvas");
+      const bounding = canvas.getBoundingClientRect();
+      const x = event.clientX - bounding.left;
+      const y = event.clientY - bounding.top;
+      console.log(x, y);
+    },
+  },
+  mounted() {
+    const canvas = document.getElementById("canvas");
+    canvas.addEventListener("click", (event) => this.localizaMouse(event));
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
