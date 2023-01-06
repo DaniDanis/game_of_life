@@ -32,9 +32,11 @@ export default {
     },
     iniciaJogo() {
       this.jogando = true;
+      this.$refs.TabuleiroCanvas.logicaJogo(this.jogando);
     },
     pausaJogo() {
       this.jogando = false;
+      this.$refs.TabuleiroCanvas.logicaJogo(this.jogando);
     },
   },
   mounted() {
