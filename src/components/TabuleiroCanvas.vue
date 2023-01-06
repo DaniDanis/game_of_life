@@ -51,6 +51,28 @@ export default {
         [],
         [],
       ],
+      vaiNascer: [
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+      ],
     };
   },
   methods: {
@@ -80,14 +102,15 @@ export default {
               var linha = this.quadradosPintados[coluna][x];
               var vizinhos = this.contaVizinhos(linha, coluna);
               if (vizinhos <= 1 || vizinhos >= 4) {
-                console.log("A celula morreu");
-              } else {
-                console.log("A celula vai viver!");
+                this.vaiMorrer[coluna].push(linha);
+              } else if (vizinhos == 3) {
+                this.vaiNascer[coluna].push(linha);
               }
-              console.log("Essa celula tinha", vizinhos, "vizinhos");
             }
           }
         }
+        console.log("Vai morrer", this.vaiMorrer);
+        console.log("Vai nascer", this.vaiNascer);
         setTimeout(() => {
           this.logicaJogo(this.jogando);
         }, 2000);
@@ -95,7 +118,24 @@ export default {
     },
     contaVizinhos(linha, coluna) {
       var contadorVizinhos = 0;
-      if (
+      if (coluna - 1 < 0) {
+        if (
+          this.quadradosPintados[coluna + 1].length === 0 &&
+          this.quadradosPintados[coluna].length === 1
+        ) {
+          return contadorVizinhos;
+        } else {
+          this.quadradosPintados[coluna].includes(linha + 1)
+            ? contadorVizinhos++
+            : null;
+          this.quadradosPintados[coluna + 1].includes(linha + 1)
+            ? contadorVizinhos++
+            : null;
+          this.quadradosPintados[coluna + 1].includes(linha)
+            ? contadorVizinhos++
+            : null;
+        }
+      } else if (
         this.quadradosPintados[coluna + 1].length === 0 &&
         this.quadradosPintados[coluna - 1].length === 0 &&
         this.quadradosPintados[coluna].length === 1
@@ -120,7 +160,7 @@ export default {
             : null;
           return contadorVizinhos;
         }
-      } else if (this.quadradosPintados[coluna - 1].length > 0) {
+      } else if (coluna - 1 > 0) {
         if (
           !this.quadradosPintados[coluna - 1].includes(linha + 1) &&
           !this.quadradosPintados[coluna - 1].includes(linha - 1) &&
