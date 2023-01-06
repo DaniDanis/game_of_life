@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <button v-on:click="draw">Inicia</button>
-    <tabuleiro-canvas></tabuleiro-canvas>
+    <button v-on:click="iniciaJogo">Inicia</button>
+    <button v-on:click="pausaJogo">Pausar</button>
+    <tabuleiro-canvas ref="TabuleiroCanvas"></tabuleiro-canvas>
   </div>
 </template>
 
@@ -9,16 +10,31 @@
 import TabuleiroCanvas from "./components/TabuleiroCanvas.vue";
 
 export default {
+  data() {
+    return {
+      x: 0,
+      y: 0,
+      jogando: false,
+    };
+  },
   components: {
     TabuleiroCanvas,
   },
   methods: {
     localizaMouse(event) {
-      const canvas = document.getElementById("canvas");
-      const bounding = canvas.getBoundingClientRect();
-      const x = event.clientX - bounding.left;
-      const y = event.clientY - bounding.top;
-      console.log(x, y);
+      if (!this.jogando) {
+        const canvas = document.getElementById("canvas");
+        const bounding = canvas.getBoundingClientRect();
+        this.x = Math.floor((event.clientX - bounding.left) / 50);
+        this.y = Math.floor((event.clientY - bounding.top) / 50);
+        this.$refs.TabuleiroCanvas.pintaQuadrado(this.x, this.y);
+      }
+    },
+    iniciaJogo() {
+      this.jogando = true;
+    },
+    pausaJogo() {
+      this.jogando = false;
     },
   },
   mounted() {
