@@ -2,6 +2,7 @@
   <div class="container">
     <button v-on:click="iniciaJogo">Inicia</button>
     <button v-on:click="pausaJogo">Pausar</button>
+    <button v-on:click="reiniciaTudo">Resetar</button>
     <tabuleiro-canvas ref="TabuleiroCanvas"></tabuleiro-canvas>
   </div>
 </template>
@@ -37,6 +38,10 @@ export default {
     pausaJogo() {
       this.jogando = false;
       this.$refs.TabuleiroCanvas.logicaJogo(this.jogando);
+    },
+    reiniciaTudo() {
+      this.jogando = false;
+      this.$refs.TabuleiroCanvas.reseta(true);
     },
   },
   mounted() {

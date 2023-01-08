@@ -81,6 +81,8 @@ export default {
       const ctx = document.getElementById("canvas").getContext("2d");
       ctx.fillStyle = "rgb(0, 0, 0, 128)";
       ctx.fillRect(coluna * 50, linha * 50, 50, 50);
+      ctx.strokeStyle = "rgb(157,157,157, 128)";
+      ctx.strokeRect(coluna * 50, linha * 50, 50, 50);
       this.quadradosPintados[coluna].push(linha);
     },
     contaVizinhos(linha, coluna) {
@@ -164,6 +166,9 @@ export default {
       this.vaiNascer = [[], [], [], [], [], [], [], [], [], []];
       if (tudo) {
         this.quadradosPintados = [[], [], [], [], [], [], [], [], [], []];
+        const ctx = document.getElementById("canvas").getContext("2d");
+        ctx.reset();
+        this.desenhaTabuleiro();
       }
     },
   },
