@@ -24,9 +24,9 @@ export default {
     },
     pintaQuadrado(x, y) {
       if (this.quadradosPintados[x].includes(y)) {
-        this.mataCelula(x, y);
+        this.mataCelula(y, x);
       } else {
-        this.criaCelula(x, y);
+        this.criaCelula(y, x);
       }
     },
     logicaJogo(jogando) {
@@ -38,7 +38,7 @@ export default {
             for (var x in this.quadradosPintados[coluna]) {
               var linha = this.quadradosPintados[coluna][x];
               var vizinhos = this.contaVizinhos(linha, coluna);
-              console.log(vizinhos, linha, coluna);
+              this.verificaSeNasce(linha, coluna, vizinhos);
               if (vizinhos <= 1 || vizinhos >= 4) {
                 this.vaiMorrer[coluna].push(linha);
               }
@@ -50,7 +50,7 @@ export default {
             var colunaMorre = Number(morre);
             for (var z in this.vaiMorrer[morre]) {
               var linhaMorre = this.vaiMorrer[morre][z];
-              this.mataCelula(colunaMorre, linhaMorre);
+              this.mataCelula(linhaMorre, colunaMorre);
             }
           }
         }
@@ -59,24 +59,25 @@ export default {
             var colunaNasce = Number(nasce);
             for (var n in this.vaiNascer[nasce]) {
               var linhaNasce = this.vaiNascer[nasce][n];
-              this.criaCelula(colunaNasce, linhaNasce);
+              this.criaCelula(linhaNasce, colunaNasce);
             }
           }
         }
+        this.reseta(false);
         setTimeout(() => {
           this.logicaJogo(this.jogando);
         }, 2000);
       }
     },
-    mataCelula(coluna, linha) {
+    mataCelula(linha, coluna) {
       const ctx = document.getElementById("canvas").getContext("2d");
       ctx.clearRect(coluna * 50, linha * 50, 50, 50);
       ctx.strokeStyle = "rgb(157, 157, 157, 128)";
       ctx.strokeRect(coluna * 50, linha * 50, 50, 50);
       var indice = this.quadradosPintados[coluna].indexOf(linha);
-      this.quadradosPintados[coluna][indice] = -1;
+      this.quadradosPintados[coluna].splice(indice, 1);
     },
-    criaCelula(coluna, linha) {
+    criaCelula(linha, coluna) {
       const ctx = document.getElementById("canvas").getContext("2d");
       ctx.fillStyle = "rgb(0, 0, 0, 128)";
       ctx.fillRect(coluna * 50, linha * 50, 50, 50);
@@ -123,6 +124,47 @@ export default {
           : null;
       }
       return vizinhos;
+    },
+    verificaSeNasce(linha, coluna, vizinhos) {
+      if (vizinhos == 8) {
+        return;
+      } else if (coluna - 1 < 0) {
+        if (!this.quadradosPintados[coluna].includes(linha + 1)) {
+          if (this.contaVizinhos(linha + 1, coluna) >= 3) {
+            this.vaiNascer[coluna].push(linha + 1);
+          }
+        }
+        if (!this.quadradosPintados[coluna + 1].includes(linha)) {
+          if (this.contaVizinhos(linha, coluna + 1) >= 3) {
+            this.vaiNascer[coluna + 1].push(linha);
+          }
+        }
+        if (!this.quadradosPintados[coluna + 1].includes(linha + 1)) {
+          if (this.contaVizinhos(linha + 1, coluna + 1) >= 3) {
+            this.vaiNascer[coluna + 1].push(linha + 1);
+          }
+        }
+        if (linha - 1 > 0) {
+          if (!this.quadradosPintados[coluna].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna) >= 3) {
+              this.vaiNascer[coluna].push(linha - 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna + 1) >= 3) {
+              this.vaiNascer[coluna + 1].push(linha - 1);
+            }
+          }
+        }
+        return;
+      }
+    },
+    reseta(tudo) {
+      this.vaiMorrer = [[], [], [], [], [], [], [], [], [], []];
+      this.vaiNascer = [[], [], [], [], [], [], [], [], [], []];
+      if (tudo) {
+        this.quadradosPintados = [[], [], [], [], [], [], [], [], [], []];
+      }
     },
   },
   mounted() {
