@@ -133,38 +133,154 @@ export default {
       } else if (coluna - 1 < 0) {
         if (linha + 1 < 9) {
           if (!this.quadradosPintados[coluna].includes(linha + 1)) {
-            if (this.contaVizinhos(linha + 1, coluna) >= 3) {
+            if (this.contaVizinhos(linha + 1, coluna) == 3) {
               this.vaiNascer[coluna].push(linha + 1);
             }
           }
           if (!this.quadradosPintados[coluna + 1].includes(linha)) {
-            if (this.contaVizinhos(linha, coluna + 1) >= 3) {
+            if (this.contaVizinhos(linha, coluna + 1) == 3) {
               this.vaiNascer[coluna + 1].push(linha);
             }
           }
           if (!this.quadradosPintados[coluna + 1].includes(linha + 1)) {
-            if (this.contaVizinhos(linha + 1, coluna + 1) >= 3) {
+            if (this.contaVizinhos(linha + 1, coluna + 1) == 3) {
               this.vaiNascer[coluna + 1].push(linha + 1);
             }
           }
-          if (linha - 1 > 0) {
+          if (linha - 1 >= 0) {
             if (!this.quadradosPintados[coluna].includes(linha - 1)) {
-              if (this.contaVizinhos(linha - 1, coluna) >= 3) {
+              if (this.contaVizinhos(linha - 1, coluna) == 3) {
                 this.vaiNascer[coluna].push(linha - 1);
               }
             }
             if (!this.quadradosPintados[coluna + 1].includes(linha - 1)) {
-              if (this.contaVizinhos(linha - 1, coluna + 1) >= 3) {
+              if (this.contaVizinhos(linha - 1, coluna + 1) == 3) {
                 this.vaiNascer[coluna + 1].push(linha - 1);
               }
             }
           }
         }
-        return;
       } else if (coluna + 1 > 9) {
-        if (!this.quadradosPintados[coluna].includes(linha + 1)) {
-          if (this.contaVizinhos(linha + 1, coluna) >= 3) {
-            this.vaiNascer[coluna].push(linha + 1);
+        if (!this.quadradosPintados[coluna].includes(linha - 1)) {
+          if (this.contaVizinhos(linha - 1, coluna) == 3) {
+            this.vaiNascer[coluna].push(linha - 1);
+          }
+        }
+        if (!this.quadradosPintados[coluna - 1].includes(linha - 1)) {
+          if (this.contaVizinhos(linha - 1, coluna - 1) == 3) {
+            this.vaiNascer[coluna - 1].push(linha - 1);
+          }
+        }
+        if (!this.quadradosPintados[coluna - 1].includes(linha)) {
+          if (this.contaVizinhos(linha, coluna - 1) == 3) {
+            this.vaiNascer[coluna - 1].push(linha);
+          }
+        }
+        if (linha + 1 < 9) {
+          if (!this.quadradosPintados[coluna - 1].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha + 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna) == 3) {
+              this.vaiNascer[coluna].push(linha + 1);
+            }
+          }
+        }
+      } else {
+        if (linha - 1 < 0) {
+          if (!this.quadradosPintados[coluna - 1].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha + 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna - 1].includes(linha)) {
+            if (this.contaVizinhos(linha, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha);
+            }
+          }
+          if (!this.quadradosPintados[coluna].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna) == 3) {
+              this.vaiNascer[coluna].push(linha + 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna + 1) == 3) {
+              this.vaiNascer[coluna + 1].push(linha + 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha)) {
+            if (this.contaVizinhos(linha, coluna + 1) == 3) {
+              this.vaiNascer[coluna + 1].push(linha);
+            }
+          }
+        } else if (linha + 1 > 9) {
+          if (!this.quadradosPintados[coluna - 1].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha - 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna - 1].includes(linha)) {
+            if (this.contaVizinhos(linha, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha);
+            }
+          }
+          if (!this.quadradosPintados[coluna].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna) == 3) {
+              this.vaiNascer[coluna].push(linha - 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna + 1) == 3) {
+              this.vaiNascer[coluna + 1].push(linha - 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha)) {
+            if (this.contaVizinhos(linha, coluna + 1) == 3) {
+              this.vaiNascer[coluna + 1].push(linha);
+            }
+          }
+        } else {
+          if (!this.quadradosPintados[coluna - 1].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha + 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna - 1].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha - 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna - 1].includes(linha)) {
+            if (this.contaVizinhos(linha, coluna - 1) == 3) {
+              this.vaiNascer[coluna - 1].push(linha);
+            }
+          }
+          if (!this.quadradosPintados[coluna].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna) == 3) {
+              this.vaiNascer[coluna].push(linha + 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna) == 3) {
+              this.vaiNascer[coluna].push(linha - 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha + 1)) {
+            if (this.contaVizinhos(linha + 1, coluna + 1) == 3) {
+              this.vaiNascer[coluna + 1].push(linha + 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha - 1)) {
+            if (this.contaVizinhos(linha - 1, coluna + 1) == 3) {
+              this.vaiNascer[coluna + 1].push(linha - 1);
+            }
+          }
+          if (!this.quadradosPintados[coluna + 1].includes(linha)) {
+            if (this.contaVizinhos(linha, coluna + 1) == 3) {
+              this.vaiNascer[coluna + 1].push(linha);
+            }
           }
         }
       }
