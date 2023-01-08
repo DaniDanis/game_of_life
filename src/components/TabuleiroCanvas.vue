@@ -38,6 +38,7 @@ export default {
             for (var x in this.quadradosPintados[coluna]) {
               var linha = this.quadradosPintados[coluna][x];
               var vizinhos = this.contaVizinhos(linha, coluna);
+              console.log(vizinhos, linha, coluna);
               if (vizinhos <= 1 || vizinhos >= 4) {
                 this.vaiMorrer[coluna].push(linha);
               }
@@ -67,84 +68,6 @@ export default {
         }, 2000);
       }
     },
-    contaVizinhos(linha, coluna) {
-      var contadorVizinhos = 0;
-      if (coluna - 1 < 0) {
-        if (
-          this.quadradosPintados[coluna + 1].length === 0 &&
-          this.quadradosPintados[coluna].length === 1
-        ) {
-          return contadorVizinhos;
-        } else {
-          this.quadradosPintados[coluna].includes(linha + 1)
-            ? contadorVizinhos++
-            : null;
-          this.quadradosPintados[coluna + 1].includes(linha + 1)
-            ? contadorVizinhos++
-            : null;
-          this.quadradosPintados[coluna + 1].includes(linha)
-            ? contadorVizinhos++
-            : null;
-        }
-      } else if (
-        this.quadradosPintados[coluna + 1].length === 0 &&
-        this.quadradosPintados[coluna - 1].length === 0 &&
-        this.quadradosPintados[coluna].length === 1
-      ) {
-        return contadorVizinhos;
-      } else if (this.quadradosPintados[coluna + 1].length > 0) {
-        if (
-          !this.quadradosPintados[coluna + 1].includes(linha + 1) &&
-          !this.quadradosPintados[coluna + 1].includes(linha - 1) &&
-          !this.quadradosPintados[coluna + 1].includes(linha)
-        ) {
-          return contadorVizinhos;
-        } else {
-          this.quadradosPintados[coluna + 1].includes(linha + 1)
-            ? contadorVizinhos++
-            : null;
-          this.quadradosPintados[coluna + 1].includes(linha - 1)
-            ? contadorVizinhos++
-            : null;
-          this.quadradosPintados[coluna + 1].includes(linha)
-            ? contadorVizinhos++
-            : null;
-          return contadorVizinhos;
-        }
-      } else if (coluna - 1 > 0) {
-        if (
-          !this.quadradosPintados[coluna - 1].includes(linha + 1) &&
-          !this.quadradosPintados[coluna - 1].includes(linha - 1) &&
-          !this.quadradosPintados[coluna - 1].includes(linha)
-        ) {
-          return contadorVizinhos;
-        } else {
-          this.quadradosPintados[coluna - 1].includes(linha + 1)
-            ? contadorVizinhos++
-            : null;
-          this.quadradosPintados[coluna - 1].includes(linha - 1)
-            ? contadorVizinhos++
-            : null;
-          this.quadradosPintados[coluna - 1].includes(linha)
-            ? contadorVizinhos++
-            : null;
-          return contadorVizinhos;
-        }
-      } else if (
-        !this.quadradosPintados[coluna].includes(linha - 1) &&
-        !this.quadradosPintados[coluna].includes(linha + 1)
-      ) {
-        return contadorVizinhos;
-      } else {
-        this.quadradosPintados[coluna].includes(linha + 1)
-          ? contadorVizinhos++
-          : null;
-        this.quadradosPintados[coluna].includes(linha - 1)
-          ? contadorVizinhos++
-          : null;
-        return contadorVizinhos;
-      }
-    },
     mataCelula(coluna, linha) {
       const ctx = document.getElementById("canvas").getContext("2d");
       ctx.clearRect(coluna * 50, linha * 50, 50, 50);
@@ -158,6 +81,48 @@ export default {
       ctx.fillStyle = "rgb(0, 0, 0, 128)";
       ctx.fillRect(coluna * 50, linha * 50, 50, 50);
       this.quadradosPintados[coluna].push(linha);
+    },
+    contaVizinhos(linha, coluna) {
+      var vizinhos = 0;
+      if (coluna - 1 < 0) {
+        this.quadradosPintados[coluna].includes(linha + 1) ? vizinhos++ : null;
+        this.quadradosPintados[coluna].includes(linha - 1) ? vizinhos++ : null;
+        this.quadradosPintados[coluna + 1].includes(linha + 1)
+          ? vizinhos++
+          : null;
+        this.quadradosPintados[coluna + 1].includes(linha) ? vizinhos++ : null;
+        this.quadradosPintados[coluna + 1].includes(linha - 1)
+          ? vizinhos++
+          : null;
+      } else if (coluna + 1 > 9) {
+        this.quadradosPintados[coluna].includes(linha + 1) ? vizinhos++ : null;
+        this.quadradosPintados[coluna].includes(linha - 1) ? vizinhos++ : null;
+        this.quadradosPintados[coluna - 1].includes(linha + 1)
+          ? vizinhos++
+          : null;
+        this.quadradosPintados[coluna - 1].includes(linha) ? vizinhos++ : null;
+        this.quadradosPintados[coluna - 1].includes(linha - 1)
+          ? vizinhos++
+          : null;
+      } else {
+        this.quadradosPintados[coluna].includes(linha + 1) ? vizinhos++ : null;
+        this.quadradosPintados[coluna].includes(linha - 1) ? vizinhos++ : null;
+        this.quadradosPintados[coluna + 1].includes(linha + 1)
+          ? vizinhos++
+          : null;
+        this.quadradosPintados[coluna + 1].includes(linha) ? vizinhos++ : null;
+        this.quadradosPintados[coluna + 1].includes(linha - 1)
+          ? vizinhos++
+          : null;
+        this.quadradosPintados[coluna - 1].includes(linha + 1)
+          ? vizinhos++
+          : null;
+        this.quadradosPintados[coluna - 1].includes(linha) ? vizinhos++ : null;
+        this.quadradosPintados[coluna - 1].includes(linha - 1)
+          ? vizinhos++
+          : null;
+      }
+      return vizinhos;
     },
   },
   mounted() {
