@@ -66,7 +66,7 @@ export default {
         this.reseta(false);
         setTimeout(() => {
           this.logicaJogo(this.jogando);
-        }, 2000);
+        }, 1500);
       }
     },
     mataCelula(linha, coluna) {
