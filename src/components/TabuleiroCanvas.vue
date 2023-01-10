@@ -1,4 +1,5 @@
 <template>
+  <p>População numero {{ dias }}</p>
   <canvas id="canvas" width="500" height="500"></canvas>
 </template>
 
@@ -10,6 +11,7 @@ export default {
       quadradosPintados: [[], [], [], [], [], [], [], [], [], []],
       vaiMorrer: [[], [], [], [], [], [], [], [], [], []],
       vaiNascer: [[], [], [], [], [], [], [], [], [], []],
+      dias: 0,
     };
   },
   methods: {
@@ -30,6 +32,7 @@ export default {
       }
     },
     logicaJogo(jogando) {
+      this.dias++;
       this.jogando = jogando;
       if (jogando) {
         for (var y in this.quadradosPintados) {
@@ -83,7 +86,9 @@ export default {
       ctx.fillRect(coluna * 50, linha * 50, 50, 50);
       ctx.strokeStyle = "rgb(157,157,157, 128)";
       ctx.strokeRect(coluna * 50, linha * 50, 50, 50);
-      this.quadradosPintados[coluna].push(linha);
+      if (!this.quadradosPintados[coluna].includes(linha)) {
+        this.quadradosPintados[coluna].push(linha);
+      }
     },
     contaVizinhos(linha, coluna) {
       var vizinhos = 0;
