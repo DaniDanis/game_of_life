@@ -2,8 +2,6 @@
 
 O Game of life desenvolvido aqui é baseado no game [Play game of life](https://playgameoflife.com/), onde é desenvolvido um automata que simula o "Jogo da vida".
 
-Link para o [repositorio](https://github.com/DaniDanis/game_of_life) do projeto caso deseja clona somente ele.
-
 Link para a [pagina publicada](https://game-of-life-danidanis.vercel.app/). 
 
 ## Instalar as dependencias do projeto.
