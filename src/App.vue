@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <button v-on:click="iniciaJogo">Inicia</button>
+    <button v-on:click="iniciaJogo">Iniciar</button>
     <button v-on:click="pausaJogo">Pausar</button>
     <button v-on:click="reiniciaTudo">Resetar</button>
     <tabuleiro-canvas ref="TabuleiroCanvas"></tabuleiro-canvas>

@@ -296,6 +296,7 @@ export default {
       this.vaiMorrer = [[], [], [], [], [], [], [], [], [], []];
       this.vaiNascer = [[], [], [], [], [], [], [], [], [], []];
       if (tudo) {
+        this.dias = 0;
         this.quadradosPintados = [[], [], [], [], [], [], [], [], [], []];
         const ctx = document.getElementById("canvas").getContext("2d");
         ctx.reset();
