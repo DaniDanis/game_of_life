@@ -1,5 +1,4 @@
 <template>
-  <p>População numero {{ dias }}</p>
   <canvas id="canvas" width="500" height="500"></canvas>
 </template>
 

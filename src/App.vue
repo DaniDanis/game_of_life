@@ -1,8 +1,10 @@
 <template>
   <div class="container">
-    <button v-on:click="iniciaJogo">Iniciar</button>
-    <button v-on:click="pausaJogo">Pausar</button>
-    <button v-on:click="reiniciaTudo">Resetar</button>
+    <div class="options">
+      <button v-on:click="iniciaJogo" :disabled="jogando">Iniciar</button>
+      <button v-on:click="pausaJogo" :disabled="!jogando">Pausar</button>
+      <button v-on:click="reiniciaTudo">Resetar</button>
+    </div>
     <tabuleiro-canvas ref="TabuleiroCanvas"></tabuleiro-canvas>
   </div>
 </template>
@@ -53,11 +55,15 @@ export default {
 
 <style>
 .container {
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   gap: 50px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 </style>
