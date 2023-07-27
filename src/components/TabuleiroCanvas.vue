@@ -11,6 +11,7 @@ export default {
       vaiMorrer: [[], [], [], [], [], [], [], [], [], []],
       vaiNascer: [[], [], [], [], [], [], [], [], [], []],
       dias: 0,
+      velocidade: 1500,
     };
   },
   methods: {
@@ -52,7 +53,7 @@ export default {
         this.reseta(false);
         setTimeout(() => {
           this.logicaJogo(this.jogando);
-        }, 1500);
+        }, this.velocidade);
       }
     },
     verificaListas(lista, criar) {

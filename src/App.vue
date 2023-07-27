@@ -6,6 +6,15 @@
       <button v-on:click="reiniciaTudo">Resetar</button>
     </div>
     <tabuleiro-canvas ref="TabuleiroCanvas"></tabuleiro-canvas>
+    <div class="options">
+      <button v-on:click="alteraVelocidade(true)">
+        Aumentar Velocidade em 1x
+      </button>
+      <p>Velocidade: {{ velocidade }}x</p>
+      <button v-on:click="alteraVelocidade(false)">
+        Diminutir Velocidade em 1x
+      </button>
+    </div>
   </div>
 </template>
 
@@ -18,6 +27,7 @@ export default {
       x: 0,
       y: 0,
       jogando: false,
+      velocidade: 1,
     };
   },
   components: {
@@ -45,6 +55,12 @@ export default {
       this.jogando = false;
       this.$refs.TabuleiroCanvas.reseta(true);
     },
+    alteraVelocidade(aumenta) {
+      let velocidade = this.$refs.TabuleiroCanvas.velocidade;
+      aumenta ? (velocidade = velocidade / 2) : (velocidade = velocidade * 2);
+      aumenta ? (this.velocidade += 1) : (this.velocidade -= 1);
+      this.$refs.TabuleiroCanvas.velocidade = velocidade;
+    },
   },
   mounted() {
     const canvas = document.getElementById("canvas");
@@ -65,5 +81,6 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  align-items: center;
 }
 </style>
