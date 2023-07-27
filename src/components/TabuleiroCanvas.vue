@@ -47,28 +47,25 @@ export default {
             }
           }
         }
-        for (var morre in this.vaiMorrer) {
-          if (this.vaiMorrer[morre].length > 0) {
-            var colunaMorre = Number(morre);
-            for (var z in this.vaiMorrer[morre]) {
-              var linhaMorre = this.vaiMorrer[morre][z];
-              this.mataCelula(linhaMorre, colunaMorre);
-            }
-          }
-        }
-        for (var nasce in this.vaiNascer) {
-          if (this.vaiNascer[nasce].length > 0) {
-            var colunaNasce = Number(nasce);
-            for (var n in this.vaiNascer[nasce]) {
-              var linhaNasce = this.vaiNascer[nasce][n];
-              this.criaCelula(linhaNasce, colunaNasce);
-            }
-          }
-        }
+        this.verificaListas(this.vaiMorrer, false);
+        this.verificaListas(this.vaiNascer, true);
         this.reseta(false);
         setTimeout(() => {
           this.logicaJogo(this.jogando);
         }, 1500);
+      }
+    },
+    verificaListas(lista, criar) {
+      for (var numeroColuna in lista) {
+        if (lista[numeroColuna].length > 0) {
+          var coluna = Number(numeroColuna);
+          for (var n in lista[numeroColuna]) {
+            var linha = lista[numeroColuna][n];
+            criar === true
+              ? this.criaCelula(linha, coluna)
+              : this.mataCelula(linha, coluna);
+          }
+        }
       }
     },
     mataCelula(linha, coluna) {
